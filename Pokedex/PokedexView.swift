@@ -11,11 +11,11 @@ struct PokedexView: View {
     
     @State var pokemonSprites: [UIImage] = []
     @State var selectedPokemonSprite: UIImage?
+    @State var loadingImage: Bool = false
     
     var pokemonRequest = PokemonRequest()
     
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    
     let placeholderImage: UIImage = UIImage(systemName: "xmark.circle")!
     
     var body: some View {
@@ -25,6 +25,7 @@ struct PokedexView: View {
                 .scaledToFit()
                 .frame(width: 500, height: 250)
                 .background(Color(.black))
+            
             ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach (pokemonSprites, id: \.self) {sprite in
@@ -36,21 +37,33 @@ struct PokedexView: View {
                                 selectedPokemonSprite = sprite
                             }
                     }
+                    
+                    if !loadingImage {
+                        Color.clear
+                            .onAppear {
+                                Task {
+                                    await loadPokemons()
+                                }
+                            }
+                    }
+
                 }
-            }
-            .onAppear {
-                Task {
-                    await loadPokemons()
+                
+                if loadingImage {
+                    ProgressView()
+                        .frame(width: 100, height: 100)
                 }
+            
             }
         }
     }
     
     func loadPokemons() async {
+        loadingImage = true
         if let pokemonResponse = await pokemonRequest.fetchPokemons()
         {
             let pokemons = pokemonResponse.results
-                    
+            
             for pokemon in pokemons {
                 if let sprite = await pokemonRequest.fetchPokemonSprite(pokemon: pokemon) {
                     pokemonSprites.append(sprite)
@@ -60,7 +73,7 @@ struct PokedexView: View {
                 selectedPokemonSprite = pokemonSprites.first
             }
         }
-        
+        loadingImage = false
     }
 }
 
