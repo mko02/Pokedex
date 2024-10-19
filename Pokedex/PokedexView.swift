@@ -14,6 +14,7 @@ struct PokedexView: View {
     @State var loadingImage: Bool = false
     
     var pokemonRequest = PokemonRequest()
+    private var pokemonCache = PokemonCache()
     
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     let placeholderImage: UIImage = UIImage(systemName: "xmark.circle")!
@@ -32,7 +33,7 @@ struct PokedexView: View {
                         Image(uiImage: sprite)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 100, height: 100)
+                            .frame(width: 120, height: 120)
                             .onTapGesture {
                                 selectedPokemonSprite = sprite
                             }
@@ -65,8 +66,12 @@ struct PokedexView: View {
             let pokemons = pokemonResponse.results
             
             for pokemon in pokemons {
-                if let sprite = await pokemonRequest.fetchPokemonSprite(pokemon: pokemon) {
+                                
+                if let cachedPokemonSprite = pokemonCache.getSprite(forKey: pokemon.name) {
+                    pokemonSprites.append(cachedPokemonSprite)
+                } else if let sprite = await pokemonRequest.fetchPokemonSprite(pokemon: pokemon) {
                     pokemonSprites.append(sprite)
+                    pokemonCache.cacheSprite(sprite, forKey: pokemon.name)
                 }
             }
             if (selectedPokemonSprite == nil) {
