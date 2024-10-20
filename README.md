@@ -9,16 +9,16 @@ To fetch the sprite of each pokemon to display, the following requests are requi
 
 Thus `PokemonRequest` is split into 2 main functions: 
 - [fetchPokemons]: fetches the list of pokemons
-- [fetchPokemonSprite]: returns the sprite of the pokemon as an UIImage
+- [fetchPokemonSprite]: returns the sprite of the pokemon as an `UIImage`
 This allows us to expand the pokedex app in the future, where we can create other functions to display additional information.
 
 The `PokemonRequest` also keeps a `nextURL` to account for pagination.
 
-The UI is presented in a LazyGridView to help with performance. Users do not need to have all sprites rendered, only the visible sprites should be rendered.
+The UI is presented in a `LazyGridView` to help with performance. Users do not need to have all sprites rendered, only the visible sprites should be rendered.
 
 ## Milestone 2: Pagination
 
-Since `PokemonRequest` keeps a `nextURL`, we just need to  call the function once the user reaches to the end of the scrollView. To detect this, a invisible view was created, and set to fetch more pokemon sprite onAppear. One main thing to note is that, the invisible view should be unrendered as we are fetching, this prevents accidently overfetching, and also ensures the onAppear work as intended.
+Since `PokemonRequest` keeps a `nextURL`, we just need to  call the function once the user reaches to the end of the `scrollView`. To detect this, a invisible view was created, and set to fetch more pokemon sprite `onAppear`. One main thing to note is that, the invisible view should be unrendered as we are fetching, this prevents accidently overfetching, and also ensures the onAppear work as intended.
 
 ## Milestone 3: Caching
 
