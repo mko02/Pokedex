@@ -25,3 +25,7 @@ Since `PokemonRequest` keeps a `nextURL`, we just need to  call the function onc
 `NSCache` was used to perform image caching. Most of the API calls came from fetching the image data, thus caching the image will reduce the latency when loading each sprite. As each pokemon name is unique, the name is used as the key for the cache. Moreover, since fetching the list of pokemon will also return the name of the pokemon, we can easily check whether the pokemon sprite exist in the cache. Using the pokemon number was another potential idea, however, for readability, it was decided to use the name for the the key when designing the cache.
 
 Below is a demo of the Pokedex App:
+
+https://github.com/user-attachments/assets/82e42ef2-b200-4a6f-9eb0-4aef019ef3f3
+
+
