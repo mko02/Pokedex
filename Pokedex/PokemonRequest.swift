@@ -36,7 +36,7 @@ let INITIAL_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20"
 
 
 class PokemonRequest {
-    var nextURL = URL(string: INITIAL_URL)
+    private var nextURL = URL(string: INITIAL_URL)
     
     func fetchPokemons() async -> (PokemonResponse)? {
         
@@ -64,9 +64,6 @@ class PokemonRequest {
     
     // given a pokemon, return the sprite image
     func fetchPokemonSprite(pokemon: Pokemon) async -> (UIImage)? {
-        
-        print(pokemon)
-        
         do {
             // fetch detailed info of the pokemon
             guard let url = URL(string: pokemon.url) else { return nil }

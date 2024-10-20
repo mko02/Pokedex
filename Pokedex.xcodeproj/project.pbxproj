@@ -35,16 +35,6 @@
 			path = Pokedex;
 			sourceTree = "<group>";
 		};
-		B5AC72FB2CC050D8009A4F04 /* PokedexTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PokedexTests;
-			sourceTree = "<group>";
-		};
-		B5AC73052CC050D8009A4F04 /* PokedexUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PokedexUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				B5AC72EA2CC050D6009A4F04 /* Pokedex */,
-				B5AC72FB2CC050D8009A4F04 /* PokedexTests */,
-				B5AC73052CC050D8009A4F04 /* PokedexUITests */,
 				B5AC72E92CC050D6009A4F04 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				B5AC72FA2CC050D8009A4F04 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				B5AC72FB2CC050D8009A4F04 /* PokedexTests */,
-			);
 			name = PokedexTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				B5AC73042CC050D8009A4F04 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				B5AC73052CC050D8009A4F04 /* PokedexUITests */,
 			);
 			name = PokedexUITests;
 			packageProductDependencies = (
